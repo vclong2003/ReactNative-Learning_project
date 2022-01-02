@@ -136,19 +136,6 @@ const WelcomeScreen = () => {
         />
       </ScrollView>
 
-      {/* <AniTouch
-        style={[
-          styles.btnNext,
-          {
-            transform: [{translateX: transx}],
-          },
-        ]}
-        onPress={() => {
-          navigation.navigate('Auth');
-        }}>
-        <Image source={require('../../assets/icons/next_icon.png')} />
-      </AniTouch> */}
-
       <ButtonNext />
 
       <View style={styles.dotContainer}>
