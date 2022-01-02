@@ -14,8 +14,10 @@ import {
 import {Text} from 'react-native-ui-lib';
 import {RootStackParamList} from '../../../App';
 import ButtonNext from './ButtonNext';
+import Config from 'react-native-config';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+
 
 interface Propspage {
   title: string;
@@ -51,6 +53,7 @@ const Page = ({title, description, source}: Propspage) => {
   // });
   return (
     <View style={styles.page}>
+      <Text>Ver: {Config.ENVIRONMENT}</Text>
       <View style={styles.containerImg}>
         <Animated.Image
           source={source}
