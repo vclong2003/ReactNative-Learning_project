@@ -7,6 +7,7 @@ import Barista from '../../screen/Barista';
 import Country from '../../screen/Country';
 import CoffeType from '../../screen/Coffee_Type';
 import Additivies from '../../screen/Additivies';
+import CreateProduct from '../../screen/CreateProduct';
 
 export type StoreStackParamList = {
   Menu: undefined;
@@ -17,6 +18,7 @@ export type StoreStackParamList = {
   CoffeeCountry: undefined;
   CoffeeType: undefined;
   Additives: undefined;
+  CreateProduct: undefined;
 };
 
 const Stack = createNativeStackNavigator<StoreStackParamList>();
@@ -73,6 +75,11 @@ const StoreStack = () => {
         name="Additives"
         component={Additivies}
         options={{headerTitle: 'Выберите добавку'}}
+      />
+      <Stack.Screen
+        name="CreateProduct"
+        component={CreateProduct}
+        options={{}}
       />
     </Stack.Navigator>
   );

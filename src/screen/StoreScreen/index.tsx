@@ -1,5 +1,5 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Header} from '@react-navigation/elements';
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,12 @@ import {
   Dimensions,
   ImageSourcePropType,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
+import {Colors} from 'react-native-ui-lib';
+import {RootStackParamList} from '../../../App';
+import api from '../../api';
+import {StoreStackParamList} from '../../nav/StoreStack';
 import HeaderMenu from './HeaderMenu';
 import ItemMenu from './itemMenu';
 
@@ -19,50 +24,30 @@ const widthItem = (widthScreen - spacing * 2) / 2;
 export interface IProduct {
   id: string;
   name: string;
-  uri: ImageSourcePropType;
+  avatar: string;
 }
 
-const _data: IProduct[] = [
-  {
-    id: '0',
-    name: 'Американо',
-    uri: require('../../assets/imgs/coffee_2.png'),
-  },
-  {
-    id: '1',
-    name: 'Капучино',
-    uri: require('../../assets/imgs/coffee_1.png'),
-  },
-  {
-    id: '2',
-    name: 'Латте',
-    uri: require('../../assets/imgs/coffee_4.png'),
-  },
-  {
-    id: '3',
-    name: 'Флэт Уайт',
-    uri: require('../../assets/imgs/coffee_3.png'),
-  },
-  {
-    id: '4',
-    name: 'Раф',
-    uri: require('../../assets/imgs/coffee_5.png'),
-  },
-  {
-    id: '5',
-    name: 'Эспрессо',
-    uri: require('../../assets/imgs/coffee_6.png'),
-  },
-];
-
 const StoreScreen = () => {
+  const navigation = useNavigation<NavigationProp<StoreStackParamList>>();
   const [data, setData] = React.useState<IProduct[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const getData = React.useCallback(() => {
-    setTimeout(() => {
-      setData(_data);
+
+  const getData = React.useCallback(async () => {
+    try {
+      const res = await fetch(api.getProduct, {
+        method: 'GET',
+        headers: {
+          token: 'erjhjweggcuyegjysyeryvcyrvjahbcj1274567325',
+        },
+      });
+      const resToJson = await res.json();
+      console.log('resToJson', resToJson);
+
+      setData(resToJson);
       setLoading(false);
-    }, 300);
+    } catch (error) {
+      console.log('error', error);
+    }
   }, []);
 
   React.useEffect(() => {
@@ -99,6 +84,29 @@ const StoreScreen = () => {
           />
         </View>
       )}
+      <TouchableOpacity
+        style={{
+          width: 50,
+          height: 50,
+          borderRadius: 25,
+          backgroundColor: Colors.primary,
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          right: 10,
+          bottom: 10,
+        }}
+        onPress={() => {
+          navigation.navigate('CreateProduct');
+        }}>
+        <Text
+          style={{
+            fontSize: 20,
+            color: '#FFF',
+          }}>
+          +
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

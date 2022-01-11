@@ -1,11 +1,11 @@
-project.ext.envConfigFiles = [
-  release: ".env.production",
-  debug: ".env.development",
-  developmentrelease: ".env.development",
-]
 apply plugin: "com.android.application"
 
 apply plugin: 'com.google.gms.google-services'
+project.ext.envConfigFiles = [
+  release: ".env.production",
+  debug: ".env",
+  developmentrelease: ".env.development",
+]
 
 apply from: project(":react-native-config").projectDir.getPath() + "/dotenv.gradle"
 

@@ -56,7 +56,11 @@ const ItemMenu = ({item, index}: Props) => {
             item: item,
           });
         }}>
-        <Image source={item.uri} style={{marginBottom: 12}} />
+        <Image
+          source={{uri: item.avatar}}
+          style={{marginBottom: 12, width: 100, height: 100}}
+        />
+
         <Text style={styles.txtName}> {item.name} </Text>
       </TouchableOpacity>
     </Animated.View>
